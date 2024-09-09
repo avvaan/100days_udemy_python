@@ -1,57 +1,11 @@
 import random
-
-word_list = ["apple", "orange", "banana"]
+from wods_hangman import word_list
+from hangman_steps import hangman_steps
 word_to_guess = random.choice (word_list)
 word_to_guess_squares = ["_"] * len (word_to_guess)
 wrong_guesses = 0
 max_wrong_guesses = 4  # Максимальное количество попыток
-hangman_steps = [
-    """
-    -----
-    |   |
-        |
-        |
-        |
-        |
-    --------
-    """,
-    """
-    -----
-    |   |
-    O   |
-        |
-        |
-        |
-    --------
-    """,
-    """
-    -----
-    |   |
-    O   |
-    |   |
-        |
-        |
-    --------
-    """,
-    """
-    -----
-    |   |
-    O   |
-   /|\\  |
-        |
-        |
-    --------
-    """,
-    """
-    -----
-    |   |
-    O   |
-   /|\\  |
-   / \\  |
-        |
-    --------
-    """
-]
+
 
 # Цикл игры
 while wrong_guesses < max_wrong_guesses and "_" in word_to_guess_squares:
@@ -66,7 +20,11 @@ while wrong_guesses < max_wrong_guesses and "_" in word_to_guess_squares:
                 word_to_guess_squares[index] = user_letter  # Открываем угаданную букву
     else:
         wrong_guesses += 1  # Увеличиваем количество ошибок
-
+    if user_letter in word_to_guess_squares:
+        print("You already guessed this letter")
+    if user_letter not in word_to_guess:
+        print(f"No {user_letter} in the word")
+    print(f"You have {max_wrong_guesses - wrong_guesses} attempts left")
 # Итог игры
 if "_" not in word_to_guess_squares:
     print ("Congratulations! You guessed the word:", word_to_guess)

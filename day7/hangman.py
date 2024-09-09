@@ -1,4 +1,5 @@
 import random
+from wods_hangman import word_list
 hangman_steps = [
     """
     -----
@@ -47,7 +48,6 @@ hangman_steps = [
     """
 ]
 lives=6
-word_list=["apple","orange","banana"]
 word_to_guess=random.choice(word_list)
 word_to_guess_squares=["_"]*len(word_to_guess)
 # Основной цикл, который продолжается, пока слово не угадано
